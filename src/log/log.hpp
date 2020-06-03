@@ -3,6 +3,8 @@
 #include <sstream>
 #include <ostream>
 
+#include <QString>
+
 class Logger {
     public:
         Logger( const char* file, int line, const char* function );
@@ -22,3 +24,8 @@ class Logger {
 };
 
 #define LOG( A ) Logger(__FILE__, __LINE__, __FUNCTION__) << A;
+
+inline std::ostream& operator<<( std::ostream& out, const QString& s ) {
+    out << s.toStdString();
+    return out;
+}
