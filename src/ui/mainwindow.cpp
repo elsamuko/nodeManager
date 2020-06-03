@@ -14,3 +14,8 @@ MainWindow::~MainWindow() {
 void MainWindow::on_buttonAddNode_clicked() {
     LOG( "Adding node" );
 }
+
+void MainWindow::on_actionQuit_triggered() {
+    LOG( "Quitting..." );
+    qApp->quit();
+}
