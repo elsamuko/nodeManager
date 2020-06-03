@@ -9,3 +9,5 @@ HEADERS += $${SRC_DIR}/ui/mainwindow.hpp
 SOURCES += $${SRC_DIR}/ui/mainwindow.cpp
 FORMS   += $${SRC_DIR}/ui/mainwindow.ui
 
+HEADERS += $${SRC_DIR}/ui/graphicsview.hpp
+SOURCES += $${SRC_DIR}/ui/graphicsview.cpp
