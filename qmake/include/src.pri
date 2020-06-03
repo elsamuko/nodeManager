@@ -16,5 +16,8 @@ FORMS   += $${SRC_DIR}/ui/mainwindow.ui
 HEADERS += $${SRC_DIR}/ui/graphicsview.hpp
 SOURCES += $${SRC_DIR}/ui/graphicsview.cpp
 
+HEADERS += $${SRC_DIR}/ui/graphicsscene.hpp
+SOURCES += $${SRC_DIR}/ui/graphicsscene.cpp
+
 HEADERS += $${SRC_DIR}/persistence.hpp
 SOURCES += $${SRC_DIR}/persistence.cpp
