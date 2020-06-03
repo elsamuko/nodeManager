@@ -1,7 +1,6 @@
 #include <QApplication>
 
 #include "ui/mainwindow.hpp"
-#include "log/log.hpp"
 
 int main( int argc, char* argv[] ) {
     LOG( "Starting" );

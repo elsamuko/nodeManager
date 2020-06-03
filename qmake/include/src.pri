@@ -2,6 +2,10 @@
 HEADERS +=  $${SRC_DIR}/log/log.hpp
 SOURCES +=  $${SRC_DIR}/log/log.cpp
 
+# header, which is precompiled and included automatically
+CONFIG += precompile_header
+PRECOMPILED_HEADER = $${SRC_DIR}/precompiled.hpp
+
 # ui
 SOURCES += $${SRC_DIR}/ui/main.cpp
 
