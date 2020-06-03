@@ -19,5 +19,8 @@ SOURCES += $${SRC_DIR}/ui/graphicsview.cpp
 HEADERS += $${SRC_DIR}/ui/graphicsscene.hpp
 SOURCES += $${SRC_DIR}/ui/graphicsscene.cpp
 
+HEADERS += $${SRC_DIR}/ui/graphicsrectitem.hpp
+SOURCES += $${SRC_DIR}/ui/graphicsrectitem.cpp
+
 HEADERS += $${SRC_DIR}/persistence.hpp
 SOURCES += $${SRC_DIR}/persistence.cpp
