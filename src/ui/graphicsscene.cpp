@@ -113,6 +113,7 @@ void GraphicsScene::fromJson( const QJsonObject& all ) {
             int y = obj["y"].toInt( -1 );
 
             CONTINUE_ON( id == -1 )
+            CONTINUE_ON( id >= jsonNodes.size() )
             CONTINUE_ON( x == -1 )
             CONTINUE_ON( y == -1 )
 
@@ -141,11 +142,14 @@ void GraphicsScene::fromJson( const QJsonObject& all ) {
             int end = obj["end"].toInt( -1 );
 
             CONTINUE_ON( id == -1 )
+            CONTINUE_ON( id >= jsonConnections.size() )
             CONTINUE_ON( start < 0 )
             CONTINUE_ON( start >= nodes.size() )
             CONTINUE_ON( end < 0 )
             CONTINUE_ON( end >= nodes.size() )
             CONTINUE_ON( start == end )
+            CONTINUE_ON( nodes[start]->getId() != start )
+            CONTINUE_ON( nodes[end]->getId() != end )
 
             GraphicsLineItem* node = new GraphicsLineItem( id, nodes[start], nodes[end] );
             addConnection( node );
