@@ -16,9 +16,9 @@ class GraphicsScene : public QGraphicsScene {
         void addNode();
 
     protected:
-        void mousePressEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;
-        void mouseMoveEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;
-        void mouseReleaseEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;
+        virtual void mousePressEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;
+        virtual void mouseMoveEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;
+        virtual void mouseReleaseEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;
 
     private:
         //! \returns QList with all nodes under \param pos
