@@ -14,6 +14,9 @@ class GraphicsScene : public QGraphicsScene {
         //! toggles mouse mode between moving/connecting nodes
         void setMode( Mode m ) { mode = m; }
 
+        //! removes all nodes and connections
+        void clearNodes();
+
         void addNode();
 
         QJsonObject toJson() const;
@@ -26,6 +29,10 @@ class GraphicsScene : public QGraphicsScene {
     private:
         //! \returns QList with all nodes under \param pos
         QList<GraphicsRectItem*> nodesAt( const QPointF& pos ) const;
+        //! \returns the connections, a node is connected to
+        QList<GraphicsLineItem*> connectionsForNode( const GraphicsRectItem* node ) const;
+        //! removes cons from connections
+        void clearConnections( const QList<GraphicsLineItem*>& cons );
 
     private:
         //! temporary drawn line while connecting nodes

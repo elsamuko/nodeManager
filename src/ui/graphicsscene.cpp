@@ -10,6 +10,40 @@
 
 GraphicsScene::GraphicsScene( QObject* parent ) : QGraphicsScene( parent ) {}
 
+QList<GraphicsLineItem*> GraphicsScene::connectionsForNode( const GraphicsRectItem* node ) const {
+    QList<GraphicsLineItem*> filtered;
+
+    for( GraphicsLineItem* connection : connections ) {
+        if( connection->connectedTo( node ) ) {
+            filtered.push_back( connection );
+        }
+    }
+
+    return filtered;
+}
+
+void GraphicsScene::clearNodes() {
+    for( GraphicsRectItem* node : nodes ) {
+
+        // delete connections for this node first
+        clearConnections( connectionsForNode( node ) );
+
+        removeItem( node );
+        delete node;
+    }
+
+    nodes.clear();
+}
+
+void GraphicsScene::clearConnections( const QList<GraphicsLineItem*>& cons ) {
+    for( GraphicsLineItem* connection : cons ) {
+        removeItem( connection );
+        connections.removeOne( connection );
+        delete connection;
+    }
+
+}
+
 void GraphicsScene::addNode() {
     GraphicsRectItem* node = new GraphicsRectItem( nodes.size() );
     size_t offset = nodes.size() * 10;
