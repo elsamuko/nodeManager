@@ -1,6 +1,6 @@
 #include "ui/graphicsrectitem.hpp"
 
-GraphicsRectItem::GraphicsRectItem( size_t id, QGraphicsItem* parent ) :
+GraphicsRectItem::GraphicsRectItem( const qint64 id, QGraphicsItem* parent ) :
     QGraphicsRectItem( parent ),
     id( id ) {
 

@@ -2,7 +2,7 @@
 
 #include <QPen>
 
-GraphicsLineItem::GraphicsLineItem( size_t id, GraphicsRectItem* startItem, GraphicsRectItem* endItem, QGraphicsItem* parent ) :
+GraphicsLineItem::GraphicsLineItem( const qint64 id, GraphicsRectItem* startItem, GraphicsRectItem* endItem, QGraphicsItem* parent ) :
     QGraphicsLineItem( parent ),
     id( id ),
     startRect( startItem ),
