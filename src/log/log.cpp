@@ -88,3 +88,19 @@ void Logger::timestamp() {
     out.width( 3 );
     out << modulo;
 }
+
+#ifdef QT_CORE_LIB
+
+void customMessageHandler( QtMsgType type, const QMessageLogContext& context, const QString& message ) {
+
+    const char* cfile     = context.file ? context.file : "unknown";
+    const char* cfunction = context.function ? context.function : "a::unknown()";
+
+    Logger( cfile, context.line, cfunction ) << message.toStdString();
+
+    if( type == QtFatalMsg ) {
+        abort();
+    }
+}
+
+#endif // QT_CORE_LIB

@@ -3,7 +3,10 @@
 #include <sstream>
 #include <ostream>
 
+#ifdef QT_CORE_LIB
+#include <QDebug>
 #include <QString>
+#endif // QT_CORE_LIB
 
 class Logger {
     public:
@@ -25,7 +28,13 @@ class Logger {
 
 #define LOG( A ) Logger(__FILE__, __LINE__, __FUNCTION__) << A;
 
+#ifdef QT_CORE_LIB
+
 inline std::ostream& operator<<( std::ostream& out, const QString& s ) {
     out << s.toStdString();
     return out;
 }
+
+void customMessageHandler( QtMsgType type, const QMessageLogContext& context, const QString& message );
+
+#endif // QT_CORE_LIB
