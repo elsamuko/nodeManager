@@ -14,5 +14,7 @@ void GraphicsView::wheelEvent( QWheelEvent* event ) {
         } else {
             scale( 0.95, 0.95 );
         }
+    } else {
+        QGraphicsView::wheelEvent( event );
     }
 }
