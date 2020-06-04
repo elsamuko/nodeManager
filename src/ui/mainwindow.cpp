@@ -57,6 +57,24 @@ void MainWindow::on_actionSave_As_triggered() {
     }
 }
 
+void MainWindow::on_actionOpen_triggered() {
+    QString documentsFolder = QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation );
+    QString filename = QFileDialog::getOpenFileName( this, "Loading from json", documentsFolder, "JSON (*.json *.JSON)" );
+
+    if( filename.isEmpty() ) {
+        return;
+    }
+
+    auto opt = persistence::load( filename );
+
+    if( opt ) {
+        scene->fromJson( *opt );
+        ui->statusbar->showMessage( "Loaded from " + filename, 3000 );
+    } else {
+        ui->statusbar->showMessage( "Could not load from " + filename, 3000 );
+    }
+}
+
 void MainWindow::on_buttonClear_clicked() {
     scene->clearNodes();
 }

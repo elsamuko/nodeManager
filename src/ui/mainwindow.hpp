@@ -22,6 +22,7 @@ class MainWindow : public QMainWindow {
         void on_buttonConnect_clicked();
         void on_actionSave_As_triggered();
         void on_buttonClear_clicked();
+        void on_actionOpen_triggered();
 
     private:
         Ui::MainWindow* ui;
