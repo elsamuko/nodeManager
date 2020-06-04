@@ -2,24 +2,24 @@
 
 #include <QGraphicsLineItem>
 
-#include "ui/graphicsrectitem.hpp"
+#include "ui/node.hpp"
 #include "ui/graphicstypes.hpp"
 
-class GraphicsLineItem : public QGraphicsLineItem {
+class Connection : public QGraphicsLineItem {
     public:
-        explicit GraphicsLineItem( const qint64 id, GraphicsRectItem* startItem, GraphicsRectItem* endItem, QGraphicsItem* parent = nullptr );
-        ~GraphicsLineItem();
+        explicit Connection( const qint64 id, Node* startItem, Node* endItem, QGraphicsItem* parent = nullptr );
+        ~Connection();
         virtual int type() const override { return static_cast<int>( CustomGraphicsTypes::LineType ); }
         qint64 getId() const { return id; }
         qint64 getIdStart() const { return startRect->getId(); }
         qint64 getIdEnd() const { return endRect->getId(); }
-        bool connectedTo( const GraphicsRectItem* node ) const;
+        bool connectedTo( const Node* node ) const;
 
     private:
         //! updates itself from new positions of startRect and endRect
         void update();
 
         qint64 id;
-        GraphicsRectItem* startRect;
-        GraphicsRectItem* endRect;
+        Node* startRect;
+        Node* endRect;
 };

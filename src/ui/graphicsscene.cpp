@@ -5,8 +5,8 @@
 #include <QGraphicsLineItem>
 #include <QGraphicsSceneMouseEvent>
 
-#include "ui/graphicsrectitem.hpp"
-#include "ui/graphicslineitem.hpp"
+#include "ui/node.hpp"
+#include "ui/connection.hpp"
 
 GraphicsScene::GraphicsScene( QObject* parent ) : QGraphicsScene( parent ) {}
 
@@ -14,10 +14,10 @@ GraphicsScene::~GraphicsScene() {
     clearNodes();
 }
 
-QList<GraphicsLineItem*> GraphicsScene::connectionsForNode( const GraphicsRectItem* node ) const {
-    QList<GraphicsLineItem*> filtered;
+QList<Connection*> GraphicsScene::connectionsForNode( const Node* node ) const {
+    QList<Connection*> filtered;
 
-    for( GraphicsLineItem* connection : connections ) {
+    for( Connection* connection : connections ) {
         if( connection->connectedTo( node ) ) {
             filtered.push_back( connection );
         }
@@ -27,7 +27,7 @@ QList<GraphicsLineItem*> GraphicsScene::connectionsForNode( const GraphicsRectIt
 }
 
 void GraphicsScene::clearNodes() {
-    for( GraphicsRectItem* node : nodes ) {
+    for( Node* node : nodes ) {
 
         // delete connections for this node first
         clearConnections( connectionsForNode( node ) );
@@ -39,8 +39,8 @@ void GraphicsScene::clearNodes() {
     nodes.clear();
 }
 
-void GraphicsScene::clearConnections( const QList<GraphicsLineItem*>& cons ) {
-    for( GraphicsLineItem* connection : cons ) {
+void GraphicsScene::clearConnections( const QList<Connection*>& cons ) {
+    for( Connection* connection : cons ) {
         removeItem( connection );
         connections.removeOne( connection );
         delete connection;
@@ -48,9 +48,9 @@ void GraphicsScene::clearConnections( const QList<GraphicsLineItem*>& cons ) {
 
 }
 
-void GraphicsScene::addNode( GraphicsRectItem* node ) {
+void GraphicsScene::addNode( Node* node ) {
     if( !node ) {
-        node = new GraphicsRectItem( nodes.size() );
+        node = new Node( nodes.size() );
         size_t offset = nodes.size() * 10;
         node->setPos( width() / 2 + offset, height() / 2 + offset );
     }
@@ -60,7 +60,7 @@ void GraphicsScene::addNode( GraphicsRectItem* node ) {
     nodes.push_back( node );
 }
 
-void GraphicsScene::addConnection( GraphicsLineItem* connection ) {
+void GraphicsScene::addConnection( Connection* connection ) {
     LOG( "Adding connection " << connection->getId() );
     addItem( connection );
     connections.push_back( connection );
@@ -71,7 +71,7 @@ QJsonObject GraphicsScene::toJson() const {
     QJsonArray jsonNodes;
     QJsonArray jsonConnections;
 
-    for( GraphicsRectItem* node : nodes ) {
+    for( Node* node : nodes ) {
         QJsonObject one;
         one["id"] = node->getId();
         one["x"] = node->x();
@@ -81,7 +81,7 @@ QJsonObject GraphicsScene::toJson() const {
 
     all["nodes"] = jsonNodes;
 
-    for( GraphicsLineItem* connection : connections ) {
+    for( Connection* connection : connections ) {
         QJsonObject one;
         one["id"] = connection->getId();
         one["start"] = connection->getIdStart();
@@ -117,13 +117,13 @@ void GraphicsScene::fromJson( const QJsonObject& all ) {
             CONTINUE_ON( x == -1 )
             CONTINUE_ON( y == -1 )
 
-            GraphicsRectItem* node = new GraphicsRectItem( id );
+            Node* node = new Node( id );
             node->setPos( x, y );
             addNode( node );
         }
     }
 
-    std::sort( nodes.begin(), nodes.end(), []( const GraphicsRectItem * left, const GraphicsRectItem * right ) {
+    std::sort( nodes.begin(), nodes.end(), []( const Node * left, const Node * right ) {
         return left->getId() < right->getId();
     } );
 
@@ -151,12 +151,12 @@ void GraphicsScene::fromJson( const QJsonObject& all ) {
             CONTINUE_ON( nodes[start]->getId() != start )
             CONTINUE_ON( nodes[end]->getId() != end )
 
-            GraphicsLineItem* node = new GraphicsLineItem( id, nodes[start], nodes[end] );
+            Connection* node = new Connection( id, nodes[start], nodes[end] );
             addConnection( node );
         }
     }
 
-    std::sort( connections.begin(), connections.end(), []( const GraphicsLineItem * left, const GraphicsLineItem * right ) {
+    std::sort( connections.begin(), connections.end(), []( const Connection * left, const Connection * right ) {
         return left->getId() < right->getId();
     } );
 
@@ -186,14 +186,14 @@ void GraphicsScene::mouseReleaseEvent( QGraphicsSceneMouseEvent* mouseEvent ) {
 
     if( line && mode == Mode::Connect ) {
 
-        QList<GraphicsRectItem*> startNodes = nodesAt( line->line().p1() );
-        QList<GraphicsRectItem*> endNodes = nodesAt( line->line().p2() );
+        QList<Node*> startNodes = nodesAt( line->line().p1() );
+        QList<Node*> endNodes = nodesAt( line->line().p2() );
 
         removeItem( line );
         delete line;
 
         if( !startNodes.empty() && !endNodes.empty() && startNodes.first() != endNodes.first() ) {
-            GraphicsLineItem* connection = new GraphicsLineItem( connections.size(), startNodes.first(), endNodes.first() );
+            Connection* connection = new Connection( connections.size(), startNodes.first(), endNodes.first() );
             addConnection( connection );
         }
 
@@ -203,14 +203,14 @@ void GraphicsScene::mouseReleaseEvent( QGraphicsSceneMouseEvent* mouseEvent ) {
     }
 }
 
-QList<GraphicsRectItem*> GraphicsScene::nodesAt( const QPointF& pos ) const {
+QList<Node*> GraphicsScene::nodesAt( const QPointF& pos ) const {
 
-    QList<GraphicsRectItem*> filtered;
+    QList<Node*> filtered;
     QList<QGraphicsItem*> underPos = items( pos );
 
     for( QGraphicsItem* item : underPos ) {
         if( item->type() == static_cast<int>( CustomGraphicsTypes::NodeType ) ) {
-            filtered.push_back( static_cast<GraphicsRectItem*>( item ) );
+            filtered.push_back( static_cast<Node*>( item ) );
         }
     }
 

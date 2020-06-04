@@ -1,6 +1,6 @@
-#include "ui/graphicsrectitem.hpp"
+#include "ui/node.hpp"
 
-GraphicsRectItem::GraphicsRectItem( const qint64 id, QGraphicsItem* parent ) :
+Node::Node( const qint64 id, QGraphicsItem* parent ) :
     QGraphicsRectItem( parent ),
     id( id ) {
 
@@ -10,7 +10,7 @@ GraphicsRectItem::GraphicsRectItem( const qint64 id, QGraphicsItem* parent ) :
     setFlag( QGraphicsItem::ItemSendsGeometryChanges, true );
 }
 
-QVariant GraphicsRectItem::itemChange( GraphicsItemChange change, const QVariant& value ) {
+QVariant Node::itemChange( GraphicsItemChange change, const QVariant& value ) {
     if( change == ItemPositionChange ) {
         for( const auto& cb : onMoveCallbacks ) {
             cb.second();

@@ -1,8 +1,8 @@
-#include "ui/graphicslineitem.hpp"
+#include "ui/connection.hpp"
 
 #include <QPen>
 
-GraphicsLineItem::GraphicsLineItem( const qint64 id, GraphicsRectItem* startItem, GraphicsRectItem* endItem, QGraphicsItem* parent ) :
+Connection::Connection( const qint64 id, Node* startItem, Node* endItem, QGraphicsItem* parent ) :
     QGraphicsLineItem( parent ),
     id( id ),
     startRect( startItem ),
@@ -16,16 +16,16 @@ GraphicsLineItem::GraphicsLineItem( const qint64 id, GraphicsRectItem* startItem
     endRect->setOnMoveCallback( this, [this] { update(); } );
 }
 
-GraphicsLineItem::~GraphicsLineItem() {
+Connection::~Connection() {
     startRect->removeOnMoveCallback( this );
     endRect->removeOnMoveCallback( this );
 }
 
-bool GraphicsLineItem::connectedTo( const GraphicsRectItem* node ) const {
+bool Connection::connectedTo( const Node* node ) const {
     return ( node == startRect ) || ( node == endRect );
 }
 
-void GraphicsLineItem::update() {
+void Connection::update() {
     QLineF line( mapFromItem( startRect, startRect->boundingRect().width() / 2, startRect->boundingRect().height() / 2 ),
                  mapFromItem( endRect, endRect->boundingRect().width() / 2, endRect->boundingRect().height() / 2 ) );
     setLine( line );

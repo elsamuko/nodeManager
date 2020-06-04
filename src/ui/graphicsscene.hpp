@@ -2,8 +2,8 @@
 
 #include <QGraphicsScene>
 
-class GraphicsRectItem;
-class GraphicsLineItem;
+class Node;
+class Connection;
 
 class GraphicsScene : public QGraphicsScene {
         Q_OBJECT
@@ -18,7 +18,7 @@ class GraphicsScene : public QGraphicsScene {
         //! removes all nodes and connections
         void clearNodes();
 
-        void addNode( GraphicsRectItem* node = nullptr );
+        void addNode( Node* node = nullptr );
 
         QJsonObject toJson() const;
         void fromJson( const QJsonObject& all );
@@ -30,17 +30,17 @@ class GraphicsScene : public QGraphicsScene {
 
     private:
         //! \returns QList with all nodes under \param pos
-        QList<GraphicsRectItem*> nodesAt( const QPointF& pos ) const;
+        QList<Node*> nodesAt( const QPointF& pos ) const;
         //! \returns the connections, a node is connected to
-        QList<GraphicsLineItem*> connectionsForNode( const GraphicsRectItem* node ) const;
+        QList<Connection*> connectionsForNode( const Node* node ) const;
         //! removes cons from connections
-        void clearConnections( const QList<GraphicsLineItem*>& cons );
-        void addConnection( GraphicsLineItem* connection );
+        void clearConnections( const QList<Connection*>& cons );
+        void addConnection( Connection* connection );
 
     private:
         //! temporary drawn line while connecting nodes
         QGraphicsLineItem* line = nullptr;
-        QList<GraphicsRectItem*> nodes;
-        QList<GraphicsLineItem*> connections;
+        QList<Node*> nodes;
+        QList<Connection*> connections;
         Mode mode = Mode::Move;
 };

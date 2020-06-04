@@ -6,9 +6,9 @@
 
 #include "ui/graphicstypes.hpp"
 
-class GraphicsRectItem : public QGraphicsRectItem {
+class Node : public QGraphicsRectItem {
     public:
-        explicit GraphicsRectItem( const qint64 id, QGraphicsItem* parent = nullptr );
+        explicit Node( const qint64 id, QGraphicsItem* parent = nullptr );
         virtual int type() const override { return static_cast<int>( CustomGraphicsTypes::NodeType ); }
         void setOnMoveCallback( const QGraphicsItem* sender, const std::function<void()>& func ) { onMoveCallbacks.emplace( sender, func ); }
         void removeOnMoveCallback( const QGraphicsItem* sender ) { onMoveCallbacks.erase( sender ); }
