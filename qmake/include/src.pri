@@ -24,5 +24,8 @@ HEADERS += $${SRC_DIR}/ui/graphicstypes.hpp
 HEADERS += $${SRC_DIR}/ui/graphicsrectitem.hpp
 SOURCES += $${SRC_DIR}/ui/graphicsrectitem.cpp
 
+HEADERS += $${SRC_DIR}/ui/graphicslineitem.hpp
+SOURCES += $${SRC_DIR}/ui/graphicslineitem.cpp
+
 HEADERS += $${SRC_DIR}/persistence.hpp
 SOURCES += $${SRC_DIR}/persistence.cpp
