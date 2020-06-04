@@ -56,3 +56,7 @@ void MainWindow::on_actionSave_As_triggered() {
         ui->statusbar->showMessage( "Could not save to " + filename, 3000 );
     }
 }
+
+void MainWindow::on_buttonClear_clicked() {
+    scene->clearNodes();
+}

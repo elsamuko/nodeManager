@@ -16,6 +16,16 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="3" column="1">
+     <widget class="QRadioButton" name="buttonConnect">
+      <property name="text">
+       <string>Connect</string>
+      </property>
+      <attribute name="buttonGroup">
+       <string notr="true">groupMoveConnect</string>
+      </attribute>
+     </widget>
+    </item>
+    <item row="4" column="1">
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -28,7 +38,7 @@
       </property>
      </spacer>
     </item>
-    <item row="1" column="1">
+    <item row="2" column="1">
      <widget class="QRadioButton" name="buttomMove">
       <property name="text">
        <string>Move</string>
@@ -48,17 +58,14 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="0" rowspan="4">
+    <item row="0" column="0" rowspan="5">
      <widget class="GraphicsView" name="graphicsView"/>
     </item>
-    <item row="2" column="1">
-     <widget class="QRadioButton" name="buttonConnect">
+    <item row="1" column="1">
+     <widget class="QPushButton" name="buttonClear">
       <property name="text">
-       <string>Connect</string>
+       <string>Clear</string>
       </property>
-      <attribute name="buttonGroup">
-       <string notr="true">groupMoveConnect</string>
-      </attribute>
      </widget>
     </item>
    </layout>
