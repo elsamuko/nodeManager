@@ -60,6 +60,12 @@ void GraphicsScene::addNode( GraphicsRectItem* node ) {
     nodes.push_back( node );
 }
 
+void GraphicsScene::addConnection( GraphicsLineItem* connection ) {
+    LOG( "Adding connection " << connection->getId() );
+    addItem( connection );
+    connections.push_back( connection );
+}
+
 QJsonObject GraphicsScene::toJson() const {
     QJsonObject all;
     QJsonArray jsonNodes;
@@ -118,9 +124,7 @@ void GraphicsScene::mouseReleaseEvent( QGraphicsSceneMouseEvent* mouseEvent ) {
 
         if( !startNodes.empty() && !endNodes.empty() && startNodes.first() != endNodes.first() ) {
             GraphicsLineItem* connection = new GraphicsLineItem( connections.size(), startNodes.first(), endNodes.first() );
-            LOG( "Adding connection " << connection->getId() );
-            addItem( connection );
-            connections.push_back( connection );
+            addConnection( connection );
         }
 
     } else {

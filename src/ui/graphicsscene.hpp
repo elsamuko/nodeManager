@@ -34,6 +34,7 @@ class GraphicsScene : public QGraphicsScene {
         QList<GraphicsLineItem*> connectionsForNode( const GraphicsRectItem* node ) const;
         //! removes cons from connections
         void clearConnections( const QList<GraphicsLineItem*>& cons );
+        void addConnection( GraphicsLineItem* connection );
 
     private:
         //! temporary drawn line while connecting nodes
