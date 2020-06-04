@@ -10,6 +10,7 @@ class GraphicsScene : public QGraphicsScene {
     public:
         enum class Mode { Move, Connect };
         explicit GraphicsScene( QObject* parent = nullptr );
+        ~GraphicsScene();
 
         //! toggles mouse mode between moving/connecting nodes
         void setMode( Mode m ) { mode = m; }

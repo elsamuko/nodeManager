@@ -10,6 +10,10 @@
 
 GraphicsScene::GraphicsScene( QObject* parent ) : QGraphicsScene( parent ) {}
 
+GraphicsScene::~GraphicsScene() {
+    clearNodes();
+}
+
 QList<GraphicsLineItem*> GraphicsScene::connectionsForNode( const GraphicsRectItem* node ) const {
     QList<GraphicsLineItem*> filtered;
 
