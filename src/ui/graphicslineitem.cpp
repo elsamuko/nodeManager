@@ -16,6 +16,11 @@ GraphicsLineItem::GraphicsLineItem( const qint64 id, GraphicsRectItem* startItem
     endRect->setOnMoveCallback( this, [this] { update(); } );
 }
 
+GraphicsLineItem::~GraphicsLineItem() {
+    startRect->removeOnMoveCallback( this );
+    endRect->removeOnMoveCallback( this );
+}
+
 void GraphicsLineItem::update() {
     QLineF line( mapFromItem( startRect, startRect->boundingRect().width() / 2, startRect->boundingRect().height() / 2 ),
                  mapFromItem( endRect, endRect->boundingRect().width() / 2, endRect->boundingRect().height() / 2 ) );

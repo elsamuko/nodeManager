@@ -8,6 +8,7 @@
 class GraphicsLineItem : public QGraphicsLineItem {
     public:
         explicit GraphicsLineItem( const qint64 id, GraphicsRectItem* startItem, GraphicsRectItem* endItem, QGraphicsItem* parent = nullptr );
+        ~GraphicsLineItem();
         virtual int type() const override { return static_cast<int>( CustomGraphicsTypes::LineType ); }
         qint64 getId() const { return id; }
         qint64 getIdStart() const { return startRect->getId(); }
