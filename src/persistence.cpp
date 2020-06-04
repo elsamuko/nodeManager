@@ -43,10 +43,10 @@ std::optional<QJsonObject> persistence::load( const QString& filename ) {
     LOG( "Loading from " << filename.toStdString() );
     std::optional<QByteArray> content = fromFile( filename );
 
-    if( !content || content.value().isEmpty() ) { LOG( "Empty json" ); return {}; }
+    if( content.value_or( QByteArray() ).isEmpty() ) { LOG( "Empty json" ); return {}; }
 
     QJsonParseError error;
-    QJsonDocument doc = QJsonDocument::fromJson( content.value(), &error );
+    QJsonDocument doc = QJsonDocument::fromJson( content.value_or( QByteArray() ), &error );
 
     if( error.error != QJsonParseError::NoError ) { LOG( "Could not parse json: " << error.errorString() ); return {}; }
 
