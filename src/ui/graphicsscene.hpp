@@ -21,6 +21,7 @@ class GraphicsScene : public QGraphicsScene {
         void addNode( GraphicsRectItem* node = nullptr );
 
         QJsonObject toJson() const;
+        void fromJson( const QJsonObject& all );
 
     protected:
         virtual void mousePressEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;

@@ -93,6 +93,72 @@ QJsonObject GraphicsScene::toJson() const {
     return all;
 }
 
+void GraphicsScene::fromJson( const QJsonObject& all ) {
+
+#define CONTINUE_ON( B ) if( ( B ) ) { continue; }
+
+    if( all.contains( "nodes" ) && all["nodes"].isArray() ) {
+        clearNodes();
+        QJsonArray jsonNodes = all["nodes"].toArray();
+
+        for( QJsonValueRef ref : jsonNodes ) {
+            QJsonObject obj = ref.toObject();
+
+            CONTINUE_ON( !obj.contains( "id" ) )
+            CONTINUE_ON( !obj.contains( "x" ) )
+            CONTINUE_ON( !obj.contains( "y" ) )
+
+            int id = obj["id"].toInt( -1 );
+            int x = obj["x"].toInt( -1 );
+            int y = obj["y"].toInt( -1 );
+
+            CONTINUE_ON( id == -1 )
+            CONTINUE_ON( x == -1 )
+            CONTINUE_ON( y == -1 )
+
+            GraphicsRectItem* node = new GraphicsRectItem( id );
+            node->setPos( x, y );
+            addNode( node );
+        }
+    }
+
+    std::sort( nodes.begin(), nodes.end(), []( const GraphicsRectItem * left, const GraphicsRectItem * right ) {
+        return left->getId() < right->getId();
+    } );
+
+    if( all.contains( "connections" ) && all["connections"].isArray() ) {
+        QJsonArray jsonConnections = all["connections"].toArray();
+
+        for( QJsonValueRef ref : jsonConnections ) {
+            QJsonObject obj = ref.toObject();
+
+            CONTINUE_ON( !obj.contains( "id" ) )
+            CONTINUE_ON( !obj.contains( "start" ) )
+            CONTINUE_ON( !obj.contains( "end" ) )
+
+            int id = obj["id"].toInt( -1 );
+            int start = obj["start"].toInt( -1 );
+            int end = obj["end"].toInt( -1 );
+
+            CONTINUE_ON( id == -1 )
+            CONTINUE_ON( start < 0 )
+            CONTINUE_ON( start >= nodes.size() )
+            CONTINUE_ON( end < 0 )
+            CONTINUE_ON( end >= nodes.size() )
+            CONTINUE_ON( start == end )
+
+            GraphicsLineItem* node = new GraphicsLineItem( id, nodes[start], nodes[end] );
+            addConnection( node );
+        }
+    }
+
+    std::sort( connections.begin(), connections.end(), []( const GraphicsLineItem * left, const GraphicsLineItem * right ) {
+        return left->getId() < right->getId();
+    } );
+
+#undef CONTINUE_ON
+}
+
 void GraphicsScene::mousePressEvent( QGraphicsSceneMouseEvent* mouseEvent ) {
     if( mode == Mode::Connect ) {
         line = new QGraphicsLineItem( QLineF( mouseEvent->scenePos(),
