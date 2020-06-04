@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include "ui/graphicsscene.hpp"
+#include "ui/graphicsrectitem.hpp"
 
 MainWindow::MainWindow( QWidget* parent )
     : QMainWindow( parent )
@@ -9,6 +10,7 @@ MainWindow::MainWindow( QWidget* parent )
     , scene( new GraphicsScene( this ) ) {
 
     ui->setupUi( this );
+    scene->setSceneRect( QRectF( 0, 0, 1000, 1000 ) );
     ui->graphicsView->setScene( scene );
 }
 
@@ -18,6 +20,9 @@ MainWindow::~MainWindow() {
 
 void MainWindow::on_buttonAddNode_clicked() {
     LOG( "Adding node" );
+    GraphicsRectItem* rect = new GraphicsRectItem();
+    scene->addItem( rect );
+    rect->setPos( scene->width() / 2, scene->height() / 2 );
 }
 
 void MainWindow::on_actionQuit_triggered() {
