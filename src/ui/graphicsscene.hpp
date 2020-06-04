@@ -21,6 +21,6 @@ class GraphicsScene : public QGraphicsScene {
     private:
         //! temporary drawn line while connecting nodes
         QGraphicsLineItem* line = nullptr;
-
+        QList<GraphicsRectItem*> nodes;
         Mode mode = Mode::Move;
 };

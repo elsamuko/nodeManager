@@ -9,8 +9,10 @@ GraphicsScene::GraphicsScene( QObject* parent ) : QGraphicsScene( parent ) {}
 
 void GraphicsScene::addNode() {
     GraphicsRectItem* rect = new GraphicsRectItem();
-    rect->setPos( width() / 2, height() / 2 );
+    size_t offset = nodes.size() * 10;
+    rect->setPos( width() / 2 + offset, height() / 2 + offset );
     addItem( rect );
+    nodes.push_back( rect );
 }
 
 void GraphicsScene::mousePressEvent( QGraphicsSceneMouseEvent* mouseEvent ) {
