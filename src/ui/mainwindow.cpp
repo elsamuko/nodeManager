@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 
 #include "ui/graphicsscene.hpp"
-#include "ui/graphicsrectitem.hpp"
 
 MainWindow::MainWindow( QWidget* parent )
     : QMainWindow( parent )
@@ -20,9 +19,7 @@ MainWindow::~MainWindow() {
 
 void MainWindow::on_buttonAddNode_clicked() {
     LOG( "Adding node" );
-    GraphicsRectItem* rect = new GraphicsRectItem();
-    scene->addItem( rect );
-    rect->setPos( scene->width() / 2, scene->height() / 2 );
+    scene->addNode();
 }
 
 void MainWindow::on_actionQuit_triggered() {

@@ -11,6 +11,8 @@ class GraphicsScene : public QGraphicsScene {
         //! toggles mouse mode between moving/connecting nodes
         void setMode( Mode m ) { mode = m; }
 
+        void addNode();
+
     protected:
         void mousePressEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;
         void mouseMoveEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;

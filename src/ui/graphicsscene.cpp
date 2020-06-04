@@ -3,7 +3,15 @@
 #include <QGraphicsLineItem>
 #include <QGraphicsSceneMouseEvent>
 
+#include "ui/graphicsrectitem.hpp"
+
 GraphicsScene::GraphicsScene( QObject* parent ) : QGraphicsScene( parent ) {}
+
+void GraphicsScene::addNode() {
+    GraphicsRectItem* rect = new GraphicsRectItem();
+    rect->setPos( width() / 2, height() / 2 );
+    addItem( rect );
+}
 
 void GraphicsScene::mousePressEvent( QGraphicsSceneMouseEvent* mouseEvent ) {
     if( mode == Mode::Connect ) {
