@@ -18,7 +18,6 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::on_buttonAddNode_clicked() {
-    LOG( "Adding node" );
     scene->addNode();
 }
 

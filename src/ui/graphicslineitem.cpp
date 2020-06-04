@@ -2,8 +2,9 @@
 
 #include <QPen>
 
-GraphicsLineItem::GraphicsLineItem( GraphicsRectItem* startItem, GraphicsRectItem* endItem, QGraphicsItem* parent ) :
+GraphicsLineItem::GraphicsLineItem( size_t id, GraphicsRectItem* startItem, GraphicsRectItem* endItem, QGraphicsItem* parent ) :
     QGraphicsLineItem( parent ),
+    id( id ),
     startRect( startItem ),
     endRect( endItem ) {
 

@@ -1,7 +1,8 @@
 #include "ui/graphicsrectitem.hpp"
 
-GraphicsRectItem::GraphicsRectItem( QGraphicsItem* parent ) :
-    QGraphicsRectItem( parent ) {
+GraphicsRectItem::GraphicsRectItem( size_t id, QGraphicsItem* parent ) :
+    QGraphicsRectItem( parent ),
+    id( id ) {
 
     setRect( QRect( 0, 0, 100, 100 ) );
     setFlag( QGraphicsItem::ItemIsMovable, true );

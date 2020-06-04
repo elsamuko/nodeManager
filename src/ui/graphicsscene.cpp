@@ -9,11 +9,12 @@
 GraphicsScene::GraphicsScene( QObject* parent ) : QGraphicsScene( parent ) {}
 
 void GraphicsScene::addNode() {
-    GraphicsRectItem* rect = new GraphicsRectItem();
+    GraphicsRectItem* node = new GraphicsRectItem( nodes.size() );
     size_t offset = nodes.size() * 10;
-    rect->setPos( width() / 2 + offset, height() / 2 + offset );
-    addItem( rect );
-    nodes.push_back( rect );
+    node->setPos( width() / 2 + offset, height() / 2 + offset );
+    LOG( "Adding node " << node->getId() );
+    addItem( node );
+    nodes.push_back( node );
 }
 
 void GraphicsScene::mousePressEvent( QGraphicsSceneMouseEvent* mouseEvent ) {
@@ -46,8 +47,8 @@ void GraphicsScene::mouseReleaseEvent( QGraphicsSceneMouseEvent* mouseEvent ) {
         delete line;
 
         if( !startNodes.empty() && !endNodes.empty() && startNodes.first() != endNodes.first() ) {
-            LOG( "Adding connection" );
-            GraphicsLineItem* connection = new GraphicsLineItem( startNodes.first(), endNodes.first() );
+            GraphicsLineItem* connection = new GraphicsLineItem( connections.size(), startNodes.first(), endNodes.first() );
+            LOG( "Adding connection " << connection->getId() );
             addItem( connection );
             connections.push_back( connection );
         }
