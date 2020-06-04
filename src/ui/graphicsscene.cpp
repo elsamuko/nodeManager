@@ -48,10 +48,13 @@ void GraphicsScene::clearConnections( const QList<GraphicsLineItem*>& cons ) {
 
 }
 
-void GraphicsScene::addNode() {
-    GraphicsRectItem* node = new GraphicsRectItem( nodes.size() );
-    size_t offset = nodes.size() * 10;
-    node->setPos( width() / 2 + offset, height() / 2 + offset );
+void GraphicsScene::addNode( GraphicsRectItem* node ) {
+    if( !node ) {
+        node = new GraphicsRectItem( nodes.size() );
+        size_t offset = nodes.size() * 10;
+        node->setPos( width() / 2 + offset, height() / 2 + offset );
+    }
+
     LOG( "Adding node " << node->getId() );
     addItem( node );
     nodes.push_back( node );

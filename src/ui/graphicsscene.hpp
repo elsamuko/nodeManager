@@ -18,7 +18,7 @@ class GraphicsScene : public QGraphicsScene {
         //! removes all nodes and connections
         void clearNodes();
 
-        void addNode();
+        void addNode( GraphicsRectItem* node = nullptr );
 
         QJsonObject toJson() const;
 
