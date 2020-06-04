@@ -11,6 +11,9 @@ class GraphicsLineItem : public QGraphicsLineItem {
         virtual int type() const override { return static_cast<int>( CustomGraphicsTypes::LineType ); }
 
     private:
+        //! updates itself from new positions of startRect and endRect
+        void update();
+
         GraphicsRectItem* startRect;
         GraphicsRectItem* endRect;
 };
