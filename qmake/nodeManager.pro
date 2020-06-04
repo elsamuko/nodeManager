@@ -20,5 +20,11 @@ include( $${PRI_DIR}/src.pri )
 macx:  include( $${PRI_DIR}/mac.pri )
 linux: include( $${PRI_DIR}/linux.pri )
 
-macx:  QMAKE_POST_LINK += $$(QTDIR)/bin/macdeployqt "$${DESTDIR}/$${TARGET}.app";
-win32: QMAKE_POST_LINK += $$(QTDIR)/bin/windeployqt "$${DESTDIR}/$${TARGET}.exe";
+macx:  QMAKE_POST_LINK += $$(QTDIR)/bin/macdeployqt "$${DESTDIR}/$${TARGET}.app" ;
+win32 {
+    CRLF = $$escape_expand(\n\t)
+    DESTDIR_WIN = $${DESTDIR}
+    DESTDIR_WIN ~= s,/,\\,g
+    FULL_TARGET = $${DESTDIR_WIN}\\$${TARGET}.exe
+    QMAKE_POST_LINK += $$quote( echo \"Deploy...\" & $$(QTDIR)/bin/windeployqt \"$${FULL_TARGET}\" $$CRLF )
+}
