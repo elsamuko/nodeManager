@@ -17,5 +17,8 @@ include( $${PRI_DIR}/setup.pri )
 DESTDIR  = $${MAIN_DIR}/bin/$${COMPILE_MODE}
 
 include( $${PRI_DIR}/src.pri )
-mac:   include( $${PRI_DIR}/mac.pri )
+macx:  include( $${PRI_DIR}/mac.pri )
 linux: include( $${PRI_DIR}/linux.pri )
+
+macx:  QMAKE_POST_LINK += $$(QTDIR)/bin/macdeployqt "$${DESTDIR}/$${TARGET}.app";
+win32: QMAKE_POST_LINK += $$(QTDIR)/bin/windeployqt "$${DESTDIR}/$${TARGET}.exe";
