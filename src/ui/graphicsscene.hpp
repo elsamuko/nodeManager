@@ -2,6 +2,8 @@
 
 #include <QGraphicsScene>
 
+class GraphicsRectItem;
+
 class GraphicsScene : public QGraphicsScene {
         Q_OBJECT
     public:
@@ -17,6 +19,10 @@ class GraphicsScene : public QGraphicsScene {
         void mousePressEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;
         void mouseMoveEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;
         void mouseReleaseEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;
+
+    private:
+        //! \returns QList with all nodes under \param pos
+        QList<GraphicsRectItem*> nodesAt( const QPointF& pos ) const;
 
     private:
         //! temporary drawn line while connecting nodes

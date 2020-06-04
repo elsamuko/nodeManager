@@ -36,4 +36,17 @@ void GraphicsScene::mouseMoveEvent( QGraphicsSceneMouseEvent* mouseEvent ) {
 
 void GraphicsScene::mouseReleaseEvent( QGraphicsSceneMouseEvent* mouseEvent ) {
     QGraphicsScene::mouseReleaseEvent( mouseEvent );
+
+QList<GraphicsRectItem*> GraphicsScene::nodesAt( const QPointF& pos ) const {
+
+    QList<GraphicsRectItem*> filtered;
+    QList<QGraphicsItem*> underPos = items( pos );
+
+    for( QGraphicsItem* item : underPos ) {
+        if( item->type() == static_cast<int>( CustomGraphicsTypes::NodeType ) ) {
+            filtered.push_back( static_cast<GraphicsRectItem*>( item ) );
+        }
+    }
+
+    return filtered;
 }
