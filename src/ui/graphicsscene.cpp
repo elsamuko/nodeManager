@@ -1,5 +1,7 @@
 #include "ui/graphicsscene.hpp"
 
+#include <QJsonObject>
+#include <QJsonArray>
 #include <QGraphicsLineItem>
 #include <QGraphicsSceneMouseEvent>
 
@@ -15,6 +17,33 @@ void GraphicsScene::addNode() {
     LOG( "Adding node " << node->getId() );
     addItem( node );
     nodes.push_back( node );
+}
+
+QJsonObject GraphicsScene::toJson() const {
+    QJsonObject all;
+    QJsonArray jsonNodes;
+    QJsonArray jsonConnections;
+
+    for( GraphicsRectItem* node : nodes ) {
+        QJsonObject one;
+        one["id"] = node->getId();
+        one["x"] = node->x();
+        one["y"] = node->y();
+        jsonNodes.append( one );
+    }
+
+    all["nodes"] = jsonNodes;
+
+    for( GraphicsLineItem* connection : connections ) {
+        QJsonObject one;
+        one["id"] = connection->getId();
+        one["start"] = connection->getIdStart();
+        one["end"] = connection->getIdEnd();
+        jsonConnections.append( one );
+    }
+
+    all["connections"] = jsonConnections;
+    return all;
 }
 
 void GraphicsScene::mousePressEvent( QGraphicsSceneMouseEvent* mouseEvent ) {

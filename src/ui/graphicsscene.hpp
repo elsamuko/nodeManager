@@ -16,6 +16,8 @@ class GraphicsScene : public QGraphicsScene {
 
         void addNode();
 
+        QJsonObject toJson() const;
+
     protected:
         virtual void mousePressEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;
         virtual void mouseMoveEvent( QGraphicsSceneMouseEvent* mouseEvent ) override;
