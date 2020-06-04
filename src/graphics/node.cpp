@@ -1,4 +1,4 @@
-#include "ui/node.hpp"
+#include "graphics/node.hpp"
 
 Node::Node( const qint64 id, QGraphicsItem* parent ) :
     QGraphicsRectItem( parent ),

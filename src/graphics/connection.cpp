@@ -1,4 +1,4 @@
-#include "ui/connection.hpp"
+#include "graphics/connection.hpp"
 
 #include <QPen>
 

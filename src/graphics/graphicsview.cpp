@@ -1,4 +1,4 @@
-#include "ui/graphicsview.hpp"
+#include "graphics/graphicsview.hpp"
 
 #include <QApplication>
 #include <QWheelEvent>

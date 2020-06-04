@@ -4,7 +4,7 @@
 #include <QFileDialog>
 #include <QStandardPaths>
 
-#include "ui/graphicsscene.hpp"
+#include "graphics/graphicsscene.hpp"
 #include "persistence.hpp"
 
 MainWindow::MainWindow( QWidget* parent )

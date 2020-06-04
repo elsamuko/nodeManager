@@ -1,12 +1,12 @@
-#include "ui/graphicsscene.hpp"
+#include "graphics/graphicsscene.hpp"
 
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QGraphicsLineItem>
 #include <QGraphicsSceneMouseEvent>
 
-#include "ui/node.hpp"
-#include "ui/connection.hpp"
+#include "graphics/node.hpp"
+#include "graphics/connection.hpp"
 
 GraphicsScene::GraphicsScene( QObject* parent ) : QGraphicsScene( parent ) {}
 

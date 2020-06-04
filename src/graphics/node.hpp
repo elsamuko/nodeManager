@@ -4,7 +4,7 @@
 
 #include <QGraphicsRectItem>
 
-#include "ui/graphicstypes.hpp"
+#include "graphics/graphicstypes.hpp"
 
 class Node : public QGraphicsRectItem {
     public:

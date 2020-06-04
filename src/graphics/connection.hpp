@@ -2,8 +2,8 @@
 
 #include <QGraphicsLineItem>
 
-#include "ui/node.hpp"
-#include "ui/graphicstypes.hpp"
+#include "graphics/node.hpp"
+#include "graphics/graphicstypes.hpp"
 
 class Connection : public QGraphicsLineItem {
     public:

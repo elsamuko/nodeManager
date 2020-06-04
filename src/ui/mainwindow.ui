@@ -120,7 +120,7 @@
   <customwidget>
    <class>GraphicsView</class>
    <extends>QGraphicsView</extends>
-   <header>ui/graphicsview.hpp</header>
+   <header>graphics/graphicsview.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
