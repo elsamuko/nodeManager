@@ -9,7 +9,7 @@ class Connection : public QGraphicsLineItem {
     public:
         explicit Connection( const qint64 id, Node* startItem, Node* endItem, QGraphicsItem* parent = nullptr );
         ~Connection();
-        virtual int type() const override { return static_cast<int>( CustomGraphicsTypes::LineType ); }
+        virtual int type() const override { return static_cast<int>( CustomGraphicsTypes::ConnectionType ); }
         qint64 getId() const { return id; }
         qint64 getIdStart() const { return startRect->getId(); }
         qint64 getIdEnd() const { return endRect->getId(); }

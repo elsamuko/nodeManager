@@ -6,5 +6,5 @@
 //! \sa GraphicsScene::nodesAt
 enum class CustomGraphicsTypes : int {
     NodeType = QGraphicsItem::UserType + 1,
-    LineType = QGraphicsItem::UserType + 2
+    ConnectionType = QGraphicsItem::UserType + 2
 };
