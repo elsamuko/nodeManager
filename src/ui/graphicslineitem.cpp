@@ -21,6 +21,10 @@ GraphicsLineItem::~GraphicsLineItem() {
     endRect->removeOnMoveCallback( this );
 }
 
+bool GraphicsLineItem::connectedTo( const GraphicsRectItem* node ) const {
+    return ( node == startRect ) || ( node == endRect );
+}
+
 void GraphicsLineItem::update() {
     QLineF line( mapFromItem( startRect, startRect->boundingRect().width() / 2, startRect->boundingRect().height() / 2 ),
                  mapFromItem( endRect, endRect->boundingRect().width() / 2, endRect->boundingRect().height() / 2 ) );

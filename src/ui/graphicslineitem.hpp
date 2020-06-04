@@ -13,6 +13,7 @@ class GraphicsLineItem : public QGraphicsLineItem {
         qint64 getId() const { return id; }
         qint64 getIdStart() const { return startRect->getId(); }
         qint64 getIdEnd() const { return endRect->getId(); }
+        bool connectedTo( const GraphicsRectItem* node ) const;
 
     private:
         //! updates itself from new positions of startRect and endRect
