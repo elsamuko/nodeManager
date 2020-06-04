@@ -49,6 +49,7 @@ void GraphicsScene::mouseReleaseEvent( QGraphicsSceneMouseEvent* mouseEvent ) {
             LOG( "Adding connection" );
             GraphicsLineItem* connection = new GraphicsLineItem( startNodes.first(), endNodes.first() );
             addItem( connection );
+            connections.push_back( connection );
         }
 
     } else {

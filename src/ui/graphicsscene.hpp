@@ -3,6 +3,7 @@
 #include <QGraphicsScene>
 
 class GraphicsRectItem;
+class GraphicsLineItem;
 
 class GraphicsScene : public QGraphicsScene {
         Q_OBJECT
@@ -28,5 +29,6 @@ class GraphicsScene : public QGraphicsScene {
         //! temporary drawn line while connecting nodes
         QGraphicsLineItem* line = nullptr;
         QList<GraphicsRectItem*> nodes;
+        QList<GraphicsLineItem*> connections;
         Mode mode = Mode::Move;
 };
