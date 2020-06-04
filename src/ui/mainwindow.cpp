@@ -24,3 +24,13 @@ void MainWindow::on_actionQuit_triggered() {
     LOG( "Quitting..." );
     qApp->quit();
 }
+
+void MainWindow::on_buttomMove_clicked() {
+    LOG( "Switching to move mode" );
+    scene->setMode( GraphicsScene::Mode::Move );
+}
+
+void MainWindow::on_buttonConnect_clicked() {
+    LOG( "Switching to connect mode" );
+    scene->setMode( GraphicsScene::Mode::Connect );
+}

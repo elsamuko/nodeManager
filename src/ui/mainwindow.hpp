@@ -18,6 +18,8 @@ class MainWindow : public QMainWindow {
     private slots:
         void on_buttonAddNode_clicked();
         void on_actionQuit_triggered();
+        void on_buttomMove_clicked();
+        void on_buttonConnect_clicked();
 
     private:
         Ui::MainWindow* ui;

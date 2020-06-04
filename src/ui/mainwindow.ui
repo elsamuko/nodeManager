@@ -15,14 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
-     <widget class="QPushButton" name="buttonAddNode">
-      <property name="text">
-       <string>Add Node</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
+    <item row="3" column="1">
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -35,8 +28,38 @@
       </property>
      </spacer>
     </item>
-    <item row="0" column="0" rowspan="2">
+    <item row="1" column="1">
+     <widget class="QRadioButton" name="buttomMove">
+      <property name="text">
+       <string>Move</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+      <attribute name="buttonGroup">
+       <string notr="true">groupMoveConnect</string>
+      </attribute>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="buttonAddNode">
+      <property name="text">
+       <string>Add Node</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" rowspan="4">
      <widget class="GraphicsView" name="graphicsView"/>
+    </item>
+    <item row="2" column="1">
+     <widget class="QRadioButton" name="buttonConnect">
+      <property name="text">
+       <string>Connect</string>
+      </property>
+      <attribute name="buttonGroup">
+       <string notr="true">groupMoveConnect</string>
+      </attribute>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -95,4 +118,7 @@
  </customwidgets>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="groupMoveConnect"/>
+ </buttongroups>
 </ui>
