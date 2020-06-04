@@ -4,6 +4,7 @@
 #include <QGraphicsSceneMouseEvent>
 
 #include "ui/graphicsrectitem.hpp"
+#include "ui/graphicslineitem.hpp"
 
 GraphicsScene::GraphicsScene( QObject* parent ) : QGraphicsScene( parent ) {}
 
@@ -35,7 +36,26 @@ void GraphicsScene::mouseMoveEvent( QGraphicsSceneMouseEvent* mouseEvent ) {
 }
 
 void GraphicsScene::mouseReleaseEvent( QGraphicsSceneMouseEvent* mouseEvent ) {
-    QGraphicsScene::mouseReleaseEvent( mouseEvent );
+
+    if( line && mode == Mode::Connect ) {
+
+        QList<GraphicsRectItem*> startNodes = nodesAt( line->line().p1() );
+        QList<GraphicsRectItem*> endNodes = nodesAt( line->line().p2() );
+
+        removeItem( line );
+        delete line;
+
+        if( !startNodes.empty() && !endNodes.empty() && startNodes.first() != endNodes.first() ) {
+            LOG( "Adding connection" );
+            GraphicsLineItem* connection = new GraphicsLineItem( startNodes.first(), endNodes.first() );
+            addItem( connection );
+        }
+
+    } else {
+        QGraphicsScene::mouseMoveEvent( mouseEvent );
+        QGraphicsScene::mouseReleaseEvent( mouseEvent );
+    }
+}
 
 QList<GraphicsRectItem*> GraphicsScene::nodesAt( const QPointF& pos ) const {
 
